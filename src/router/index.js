@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Text from '../views/text.vue'
+import Text from '../views/Text.vue'
 
 
 Vue.use(VueRouter)
@@ -10,7 +10,7 @@ const routes = [
     path: '/',
     name: 'Text',
     component: Text
-  },
+  }
   // {
   //   path: '/about',
   //   name: 'About',
@@ -23,7 +23,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+
   routes
 })
 
