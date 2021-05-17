@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Text from '../views/Text.vue'
+import Home from '../views/Home.vue'
+import Header from '../views/Header.vue'
+import Main from '../views/Main.vue'
+import Foot from '../views/Foot.vue'
+
 
 
 Vue.use(VueRouter)
@@ -8,17 +12,45 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Text',
-    component: Text
+    redirect: '/home'
+
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home,
+    // children: [
+    //   {
+    //     path: '/header',
+    //     components: () => import('../components/Header.vue')
+    //   },
+    //   {
+    //     path:'/main',
+    //     components: () => import('../components/Main.vue')
+    //   },
+    //   {
+    //     path:'foot',
+    //     components:() => import('../components/Foot.vue')
+    //   }
+    // ]
+  },
+  {
+    path: '/header',
+    name: 'Header',
+    component: Header
+  },
+  {
+    path: '/main',
+    name: 'Main',
+    component: Main,
+
+  },
+  {
+    path: '/foot',
+    name: 'Foot',
+    component: Foot
   }
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
+
 ]
 
 const router = new VueRouter({

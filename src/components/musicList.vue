@@ -1,10 +1,15 @@
 <template>
-    <div>测试hahahahhaha</div>
+  <div>
+      歌单
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+
+}
 </script>
 
 <style>
+
 </style>
