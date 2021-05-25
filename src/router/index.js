@@ -19,6 +19,9 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
+    meta: {
+      isLogin: true
+    },
     // children: [
     //   {
     //     path: '/header',

@@ -20,14 +20,28 @@
             <div class="center-lft">
                 <div class="person-img">
                     <img
-                        src="../assets/img/users.png"
+                        :src="
+                            usersImg
+                                ? usersImg
+                                : require('@/assets/img/users.png')
+                        "
                         alt=""
-                        style="width: 35px; height: 35px; margin-top: 4px"
+                        style="
+                            width: 50px;
+                            height: 50px;
+                            margin-top: -2px;
+                            border-radius: 50%;
+                        "
                     />
                 </div>
                 <div class="users">
-                    <span round @click="dialogFormVisible = true">未登录</span>
-
+                    <span
+                        round
+                        @click="dialogFormVisible = true"
+                        v-if="!showname"
+                        >未登录</span
+                    >
+                    <span v-else>{{ this.usersInfo.nickname }}</span>
                     <el-dialog
                         :visible.sync="dialogFormVisible"
                         class="loginBox"
@@ -133,11 +147,18 @@ export default {
             loginPower: false,
             /*插入form方法*/
             /*设定规则指向*/
+            //账号密码模态框
             loginMsg: {
                 password: "",
                 phone: "",
-                // delivery: false,
+                delivery: false,
             },
+            //昵称显示隐藏
+            showname: false,
+            //个人信息
+            usersInfo: {},
+            //动态头像
+            usersImg: "",
             rules2: {
                 password: [{ validator: validatePass, trigger: "blur" }],
 
@@ -173,11 +194,29 @@ export default {
                     type: "success",
                     message: "登录成功",
                 });
-                const token = data.token
+                //登录成功模态框关闭
+                this.dialogFormVisible = false;
+                //token 保存本地
+                const token = data.token;
+                localStorage.setItem("token", token);
+                //登录成功显示昵称
+                this.showname = true;
+                //登录成功个人信息赋值
+                this.usersInfo = data.profile;
+                //登录成功个人信息保存本地
+                // const loginInfo = data.profile;
+                // localStorage.setItem("loginInfo", loginInfo);
+                //头像
+                this.usersImg = data.profile.avatarUrl;
+                //保存登录状态
                
-                localStorage.setItem('token',token)
-                const usersInfo = data.profile
-                console.log(usersInfo);
+
+                this.console.log(this.usersInfo, "222");
+            } else {
+                this.$message({
+                    type: "error",
+                    message: "账户名或密码错误！请重新输入",
+                });
             }
         },
         //登录
@@ -202,9 +241,9 @@ export default {
         //         }
         //     });
         // },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
-        },
+        // resetForm(formName) {
+        //     this.$refs[formName].resetFields();
+        // },
 
         //搜索框内容
         querySearch(queryString, cb) {
@@ -313,7 +352,7 @@ export default {
             }
         }
         .center-lft {
-            width: 120px;
+            width: 200px;
             height: 100%;
 
             box-sizing: border-box;

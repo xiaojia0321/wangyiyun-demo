@@ -3,11 +3,17 @@ import apis from '../../http/apis'
 
 
 export default {
-    namespaced:true,
-    state:{
+    namespaced: true,
+    state: {
+       
 
     },
-    actions:{
+    mutations: {
        
+      
+
+    },
+    actions: {
+
     }
 }
