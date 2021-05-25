@@ -3,7 +3,7 @@
         <div class="center">
             <div class="center-rt">
                 <div class="img"></div>
-                <span class="text">小成音乐</span>
+                <span class="text">音乐</span>
                 <i class="el-icon-arrow-left"></i>
                 <el-row class="demo-autocomplete">
                     <el-col :span="12">
@@ -37,10 +37,10 @@
                     >
                         <!-- 插入测试 -->
                         <el-form
-                            :model="ruleForm2"
+                            :model="loginMsg"
                             status-icon
                             :rules="rules2"
-                            ref="ruleForm2"
+                            ref="loginMsg"
                             label-width="100px"
                             class="demo-ruleForm"
                         >
@@ -53,30 +53,23 @@
                                     margin-left: 130px;
                                 "
                             />
-                            <el-form-item prop="num">
+                            <el-form-item prop="phone">
                                 <el-input
-                                    v-model.number="ruleForm2.num"
+                                    v-model.number="loginMsg.phone"
                                     style="width: 280px"
                                     prefix-icon="el-icon-user-solid"
                                 ></el-input>
                             </el-form-item>
 
-                            <el-form-item prop="pass">
+                            <el-form-item prop="password">
                                 <el-input
                                     type="password"
-                                    v-model="ruleForm2.pass"
+                                    v-model="loginMsg.password"
                                     auto-complete="off"
                                     style="width: 280px"
                                     prefix-icon="el-icon-key"
                                 ></el-input>
                             </el-form-item>
-
-                            <!-- <el-form-item label="记住密码" prop="delivery">
-                                <el-switch
-                                    v-model="ruleForm2.delivery"
-                                ></el-switch>
-                            </el-form-item>
-                            <span><a>忘记密码？</a></span> -->
                         </el-form>
                         <!-- 插入测试 -->
 
@@ -84,13 +77,13 @@
                             <el-button
                                 @click="
                                     dialogFormVisible = false;
-                                    resetForm('ruleForm2');
+                                    resetForm('loginMsg');
                                 "
                                 >取 消</el-button
                             >
                             <el-button
                                 type="primary"
-                                @click="submitForm('ruleForm2')"
+                                @click="submitForm('loginMsg')"
                                 >登 录</el-button
                             >
                         </div>
@@ -102,6 +95,8 @@
 </template>
 
 <script>
+import apis from "../http/apis";
+import axios from "axios";
 export default {
     data() {
         var checkNum = (rule, value, callback) => {
@@ -112,7 +107,7 @@ export default {
                 if (!Number.isInteger(value)) {
                     callback(new Error("请输入数字值"));
                 } else {
-                    var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+                    var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
                     if (!myreg.test(value)) {
                         callback(new Error("请输入正确的手机号码"));
                     } else {
@@ -138,15 +133,15 @@ export default {
             loginPower: false,
             /*插入form方法*/
             /*设定规则指向*/
-            ruleForm2: {
-                pass: "",
-                num: "",
-                delivery: false,
+            loginMsg: {
+                password: "",
+                phone: "",
+                // delivery: false,
             },
             rules2: {
-                pass: [{ validator: validatePass, trigger: "blur" }],
+                password: [{ validator: validatePass, trigger: "blur" }],
 
-                num: [{ validator: checkNum, trigger: "blur" }],
+                username: [{ validator: checkNum, trigger: "blur" }],
             },
 
             /*插入form方法*/
@@ -166,23 +161,47 @@ export default {
         this.restaurants = this.loadAll();
     },
     methods: {
-        //登录
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    //提交成功做的动作
-                    dialogFormVisible = false;
-                    /* alert('submit!') ; */
-                    this.$message({
-                        type: "success",
-                        message: "提交成功",
-                    });
-                } else {
-                    console.log("error submit!!");
-                    return false;
-                }
-            });
+        async submitForm() {
+            const data = await apis.users.login(
+                // phone: "19834279812",
+                // password: "jsq000000",
+                this.loginMsg
+            );
+            console.log(data);
+            if (data.code == 200) {
+                this.$message({
+                    type: "success",
+                    message: "登录成功",
+                });
+                const token = data.token
+               
+                localStorage.setItem('token',token)
+                const usersInfo = data.profile
+                console.log(usersInfo);
+            }
         },
+        //登录
+        // submitForm(formName) {
+        //     this.$refs[formName].validate((valid) => {
+        //         if (valid) {
+        //             //提交成功做的动作
+
+        //             const data = apis.users.login(this.loginMsg);
+
+        //             console.log(this.data, "111");
+        //             this.dialogFormVisible = false;
+        //             /* alert('submit!') ; */
+        //             this.$message({
+        //                 type: "success",
+        //                 message: "提交成功",
+        //             });
+        //             console.log(333);
+        //         } else {
+        //             console.log("error submit!!");
+        //             return false;
+        //         }
+        //     });
+        // },
         resetForm(formName) {
             this.$refs[formName].resetFields();
         },
@@ -216,7 +235,7 @@ export default {
                     value: "新旺角茶餐厅",
                     address: "上海市普陀区真北路988号创邑金沙谷6号楼113",
                 },
-                 { value: "三全鲜食（北新泾店）", address: "长宁区新渔路144号" },
+                { value: "三全鲜食（北新泾店）", address: "长宁区新渔路144号" },
                 {
                     value: "Hot honey 首尔炸鸡（仙霞路）",
                     address: "上海市长宁区淞虹路661号",
@@ -225,13 +244,11 @@ export default {
                     value: "新旺角茶餐厅",
                     address: "上海市普陀区真北路988号创邑金沙谷6号楼113",
                 },
-                 { value: "三全鲜食（北新泾店）", address: "长宁区新渔路144号" },
+                { value: "三全鲜食（北新泾店）", address: "长宁区新渔路144号" },
                 {
                     value: "Hot honey 首尔炸鸡（仙霞路）",
                     address: "上海市长宁区淞虹路661号",
                 },
-               
-
             ];
         },
         handleSelect(item) {
@@ -298,7 +315,7 @@ export default {
         .center-lft {
             width: 120px;
             height: 100%;
-           
+
             box-sizing: border-box;
             display: flex;
             .person-img {

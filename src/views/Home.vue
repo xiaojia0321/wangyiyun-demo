@@ -10,17 +10,19 @@
 import Header from "./Header";
 import Main from "./Main";
 import Foot from "./Foot";
+import axios from "axios";
 export default {
     components: {
         Header,
         Main,
         Foot,
     },
+   
 };
 </script>
 
 <style lang="scss" scoped>
-*{
+* {
     margin: 0;
     padding: 0;
 }
@@ -34,6 +36,5 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    
 }
 </style>

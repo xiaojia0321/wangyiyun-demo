@@ -73,7 +73,7 @@ export default {
 .header {
     width: 514px;
     height: 90px;
-    border: 1px solid;
+   
     margin: auto;
     text-align: center;
     line-height: 90px;
@@ -82,7 +82,7 @@ export default {
     .header-ul {
         width: 100%;
         height: 90px;
-        border: 1px solid;
+        
         list-style: none;
         box-sizing: border-box;
         margin: 0;
@@ -95,7 +95,7 @@ export default {
         .ui-box {
             text-decoration: none;
             // border: none;
-            border: 1px solid;
+           
             font-family: "Roboto", sans-serif;
             position: relative;
             vertical-align: baseline;

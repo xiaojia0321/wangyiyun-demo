@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Header from '../views/Header.vue'
-import Main from '../views/Main.vue'
-import Foot from '../views/Foot.vue'
+// import Header from '../views/Header.vue'
+// import Main from '../views/Main.vue'
+// import Foot from '../views/Foot.vue'
 
 
 
@@ -34,22 +34,22 @@ const routes = [
     //   }
     // ]
   },
-  {
-    path: '/header',
-    name: 'Header',
-    component: Header
-  },
-  {
-    path: '/main',
-    name: 'Main',
-    component: Main,
+  // {
+  //   path: '/header',
+  //   name: 'Header',
+  //   component: Header
+  // },
+  // {
+  //   path: '/main',
+  //   name: 'Main',
+  //   component: Main,
 
-  },
-  {
-    path: '/foot',
-    name: 'Foot',
-    component: Foot
-  }
+  // },
+  // {
+  //   path: '/foot',
+  //   name: 'Foot',
+  //   component: Foot
+  // }
 
 ]
 

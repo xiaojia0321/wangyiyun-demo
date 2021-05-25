@@ -55,12 +55,11 @@ export default {
     width: 100%;
     height: 650px;
     border: 1px solid;
-    display: flex;
-    
     .lft {
-        width: 288px;
+        width: 20%;
         height: 100%;
         border: 1px solid;
+        position: fixed;
         .main-text1 {
             opacity: 0.5;
             font-weight: 50;
@@ -94,9 +93,12 @@ export default {
         }
     }
     .rt {
-        flex-grow: 1;
+      
+        width: 80%;
         height: 100%;
         border: 1px solid;
+        position: relative;
+        left: 288px;
     }
 }
 </style>
