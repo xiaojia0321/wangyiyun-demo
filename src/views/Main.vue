@@ -54,11 +54,12 @@ export default {
 .mainBox {
     width: 100%;
     height: 650px;
-    border: 1px solid;
+    // border: 1px solid;
     .lft {
         width: 20%;
-        height: 100%;
-        border: 1px solid;
+        height: 79%;
+        border: 1px solid #aaa;
+        border-bottom: none;
         position: fixed;
         .main-text1 {
             opacity: 0.5;
@@ -67,7 +68,7 @@ export default {
 
             width: 100%;
             height: 40px;
-            border: 1px solid;
+            // border: 1px solid;
             box-sizing: border-box;
             line-height: 40px;
             padding-left: 10px;
@@ -96,7 +97,7 @@ export default {
       
         width: 80%;
         height: 100%;
-        border: 1px solid;
+        // border: 1px solid;
         position: relative;
         left: 288px;
     }

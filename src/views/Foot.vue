@@ -17,8 +17,12 @@ export default {};
 .footBox {
     width: 100%;
     height: 90px;
-    border: 1px solid;
-    
+    border: 1px solid red;
+    position: fixed;
+    top: 88%;
+    left: 0;
+    right: 0;
+    bottom: 0;
     .center{
         width: 700px;
         height: 100%;

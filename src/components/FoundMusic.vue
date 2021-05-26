@@ -158,9 +158,10 @@ export default {
 .main {
     width: 100%;
     height: 540px;
-    border: 1px solid;
+    // border: 1px solid;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    margin-left: 3px;
 }
 </style>
