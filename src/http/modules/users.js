@@ -20,6 +20,12 @@ export default {
         return axios({
             url: '/search/hot'
         })
+    },
+    //获取登录状态
+    getUserInfo() {
+        return axios({
+            url: '/login/status'
+        })
     }
 
 }

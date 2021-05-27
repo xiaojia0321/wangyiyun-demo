@@ -8,7 +8,7 @@
 
 <script>
 import Header from "./Header";
-import Main from "./Main";
+import Main from "./Main/Main";
 import Foot from "./Foot";
 import axios from "axios";
 export default {
@@ -17,7 +17,6 @@ export default {
         Main,
         Foot,
     },
-   
 };
 </script>
 

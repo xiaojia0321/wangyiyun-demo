@@ -8,10 +8,20 @@ export default {
             url: '/banner'
         })
     },
+    //推荐歌单
     getRecommendMusic() {
         return axios({
-            url: '/personalized'
+            url: '/personalized',
+
         })
+    },
+    //获取歌单详情
+    getMusicDetails(params) {
+        return axios({
+            url: '/playlist/detail',
+            params
+        })
+
     },
     //独家放送
     getPersonList() {
@@ -32,7 +42,7 @@ export default {
     getMv() {
         return axios({
             url: '/personalized/mv',
-           
+
         })
     }
 }

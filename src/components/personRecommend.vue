@@ -45,14 +45,18 @@
                 >
             </div>
             <div class="musicList" style="margin-bottom: 10px">
-                <div
-                    class="box"
-                    v-for="(item, index) in recommendData.slice(0, 10)"
-                    :key="index"
-                >
-                    <img :src="item.picUrl" alt="" class="box-img" />
-                    <div class="box-text">{{ item.name }}</div>
-                </div>
+                <router-link :to="{ path: '/musicList2' }">
+                    <div
+                        class="box"
+                        v-for="(item, index) in recommendData.slice(0, 10)"
+                        :key="index"
+                        style="float: left; margin-left: 10px"
+                        @click="getMusicDetail(item.id)"
+                    >
+                        <img :src="item.picUrl" alt="" class="box-img" />
+                        <div class="box-text">{{ item.name }}</div>
+                    </div>
+                </router-link>
             </div>
 
             <!-- 独家放送 -->
@@ -145,7 +149,13 @@ export default {
         ...mapState(["exclusiveMusic", "newMusic", "mvMusic"]),
     },
     methods: {
-        ...mapActions(["getExclusiveMusic", "getNewMusic", "getMv"]),
+        ...mapActions([
+            "getExclusiveMusic",
+            "getNewMusic",
+            "getMv",
+            "getMusicDetail",
+        ]),
+
         //获取轮播图
         async getBanner() {
             const data = await apis.banner.getBanner();
@@ -157,6 +167,7 @@ export default {
         //获取推荐歌单
         async getRecommendMusic() {
             const data = await apis.banner.getRecommendMusic();
+           
 
             if (data.code == 200) {
                 this.recommendData = data.result;
@@ -187,8 +198,6 @@ export default {
         background-color: #d3dce6;
     }
     .happybox {
-        height: 1700px;
-
         .happy1 {
             width: 1100px;
             height: 50px;
@@ -244,6 +253,7 @@ export default {
                     width: 100%;
                     height: 200px;
                     border-radius: 7px;
+                    box-shadow: 0 0px 7px 2px rgba(87, 85, 85, 0.6);
                 }
                 .person-text {
                     width: 100%;
@@ -259,7 +269,7 @@ export default {
             .mvbox {
                 width: 344px;
                 height: 280px;
-                border: 1px solid red;
+
                 margin-top: 0px;
 
                 border-radius: 7px;
@@ -267,11 +277,11 @@ export default {
                     width: 100%;
                     height: 200px;
                     border-radius: 7px;
+                    box-shadow: 0 0px 7px 2px rgba(87, 85, 85, 0.6);
                 }
                 .mv-text {
                     width: 100%;
                     height: 70px;
-                    border: 1px solid;
 
                     border-radius: 7px;
                     // text-align: center;

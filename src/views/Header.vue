@@ -187,15 +187,11 @@ export default {
         };
     },
     mounted() {
-        
         // this.loginOut();  //退出登录
         this.getSearch();
         this.restaurants = this.loadAll();
     },
-    beforeUpdate(){
-        
-
-    },
+    beforeUpdate() {},
     computed: {
         ...mapState(["searchData"]),
     },
@@ -262,10 +258,10 @@ export default {
         // },
 
         //退出登录
-        async loginOut() {
-            const data = await apis.users.loginout();
-            console.log(data);
-        },
+        // async loginOut() {
+        //     const data = await apis.users.loginout();
+        //     console.log(data);
+        // },
 
         //搜索框内容
         querySearch(queryString, cb) {
@@ -355,11 +351,8 @@ export default {
         .center-lft {
             width: 270px;
             height: 100%;
-            border: 1px solid;
-
             box-sizing: border-box;
             display: flex;
-
             .person-img {
                 width: 45px;
                 height: 45px;

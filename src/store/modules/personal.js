@@ -9,7 +9,9 @@ export default {
         //最新音乐
         newMusic: [],
         //推荐mv
-        mvMusic: []
+        mvMusic: [],
+        //歌单详情
+        details: []
 
     },
     mutations: {
@@ -51,10 +53,16 @@ export default {
         //推荐mv
         async getMv(context) {
             const data = await apis.banner.getMv()
-           
+
             if (data.code == 200) {
                 context.commit('setMv', data)
             }
+
+        },
+        //歌单详情
+        async getMusicDetail(context, id) {
+            const data = await apis.banner.getMusicDetails({ id })
+            console.log(data, '333');
 
         }
 
