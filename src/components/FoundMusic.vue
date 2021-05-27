@@ -157,7 +157,7 @@ export default {
 }
 .main {
     width: 100%;
-    height: 540px;
+    height: 565px;
     // border: 1px solid;
     overflow-y: scroll;
     display: flex;

@@ -103,7 +103,7 @@
                     class="personbox mvbox"
                     v-for="item in mvMusic.slice(0, 3)"
                     :key="item.id"
-                    style="height: 250px"
+                    style="height: 260px"
                 >
                     <img :src="item.picUrl" alt="" class="mv-img" />
                     <div class="person-text mv-text">
@@ -169,7 +169,7 @@ export default {
 <style lang="scss" scoped>
 .person {
     width: 100%;
-    height: 1690px;
+    // height: 1750px;
 
     .el-carousel__item h3 {
         color: #475669;
@@ -216,24 +216,21 @@ export default {
 
                 margin-top: 20px;
                 border-radius: 7px;
-               
+
                 .box-img {
                     width: 100%;
                     height: 190px;
-                    border-radius: 7px ;
-                     box-shadow: 0 0px 7px 2px rgba(87, 85, 85, 0.6);
+                    border-radius: 7px;
+                    box-shadow: 0 0px 7px 2px rgba(87, 85, 85, 0.6);
                 }
                 .box-text {
                     width: 100%;
                     height: 70px;
-                   
                     box-sizing: border-box;
                     padding-top: 5px;
                     font-size: 15px;
-
                     border-radius: 7px;
                     text-align: center;
-                    line-height: 30px;
                 }
             }
             .personbox {
@@ -261,7 +258,9 @@ export default {
             }
             .mvbox {
                 width: 344px;
-                height: 270px;
+                height: 280px;
+                border: 1px solid red;
+                margin-top: 0px;
 
                 border-radius: 7px;
                 .mv-img {
@@ -272,6 +271,7 @@ export default {
                 .mv-text {
                     width: 100%;
                     height: 70px;
+                    border: 1px solid;
 
                     border-radius: 7px;
                     // text-align: center;

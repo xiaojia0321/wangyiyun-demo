@@ -51,7 +51,7 @@ export default {
         //推荐mv
         async getMv(context) {
             const data = await apis.banner.getMv()
-            console.log(data, '111');
+           
             if (data.code == 200) {
                 context.commit('setMv', data)
             }

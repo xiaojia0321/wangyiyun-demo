@@ -53,14 +53,15 @@ export default {
 <style lang="scss" scoped>
 .mainBox {
     width: 100%;
-    height: 650px;
+    height: 660px;
     // border: 1px solid;
     .lft {
         width: 20%;
-        height: 79%;
+        height: 81%;
         border: 1px solid #aaa;
         border-bottom: none;
         position: fixed;
+        border-top: none;
         .main-text1 {
             opacity: 0.5;
             font-weight: 50;
@@ -94,10 +95,9 @@ export default {
         }
     }
     .rt {
-      
         width: 80%;
         height: 100%;
-        // border: 1px solid;
+
         position: relative;
         left: 288px;
     }

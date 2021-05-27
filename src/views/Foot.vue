@@ -2,8 +2,9 @@
     <div class="footBox">
         <div class="center">
             <div class="button"></div>
-            <div class="slider"></div>
-
+            <div class="slider">
+                <audio src=""></audio>
+            </div>
         </div>
         <div class="rt"></div>
     </div>
@@ -16,25 +17,24 @@ export default {};
 <style lang="scss" scoped>
 .footBox {
     width: 100%;
-    height: 90px;
+    height: calc(100% - 740px);
     border: 1px solid red;
     position: fixed;
-    top: 88%;
+    top: 90%;
     left: 0;
     right: 0;
     bottom: 0;
-    .center{
+    .center {
         width: 700px;
         height: 100%;
         border: 1px solid;
-      
-       float: left;
+
+        float: left;
         margin: auto;
         margin-left: 27%;
         margin-right: 40px;
-
     }
-    .rt{
+    .rt {
         width: 200px;
         height: 100%;
         border: 1px solid;

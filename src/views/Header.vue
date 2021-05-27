@@ -41,7 +41,13 @@
                         v-if="!showname"
                         >未登录</span
                     >
-                    <span v-else>{{ this.usersInfo.nickname }}</span>
+                    <span v-else
+                        >{{ this.usersInfo.nickname }}
+                        <span style="margin-left: 30px" @click="loginOut"
+                            >退出</span
+                        >
+                    </span>
+
                     <el-dialog
                         :visible.sync="dialogFormVisible"
                         class="loginBox"
@@ -111,6 +117,8 @@
 <script>
 import apis from "../http/apis";
 import axios from "axios";
+import { createNamespacedHelpers } from "vuex";
+const { mapActions, mapState } = createNamespacedHelpers("users");
 export default {
     data() {
         var checkNum = (rule, value, callback) => {
@@ -179,15 +187,24 @@ export default {
         };
     },
     mounted() {
+        
+        // this.loginOut();  //退出登录
+        this.getSearch();
         this.restaurants = this.loadAll();
     },
+    beforeUpdate(){
+        
+
+    },
+    computed: {
+        ...mapState(["searchData"]),
+    },
     methods: {
+        ...mapActions(["getSearch"]),
+        //搜索框
+
         async submitForm() {
-            const data = await apis.users.login(
-                // phone: "19834279812",
-                // password: "jsq000000",
-                this.loginMsg
-            );
+            const data = await apis.users.login(this.loginMsg);
             console.log(data);
             if (data.code == 200) {
                 this.$message({
@@ -209,7 +226,6 @@ export default {
                 //头像
                 this.usersImg = data.profile.avatarUrl;
                 //保存登录状态
-               
 
                 this.console.log(this.usersInfo, "222");
             } else {
@@ -245,6 +261,12 @@ export default {
         //     this.$refs[formName].resetFields();
         // },
 
+        //退出登录
+        async loginOut() {
+            const data = await apis.users.loginout();
+            console.log(data);
+        },
+
         //搜索框内容
         querySearch(queryString, cb) {
             var restaurants = this.restaurants;
@@ -264,31 +286,10 @@ export default {
             };
         },
         loadAll() {
-            return [
-                { value: "三全鲜食（北新泾店）", address: "长宁区新渔路144号" },
-                {
-                    value: "Hot honey 首尔炸鸡（仙霞路）",
-                    address: "上海市长宁区淞虹路661号",
-                },
-                {
-                    value: "新旺角茶餐厅",
-                    address: "上海市普陀区真北路988号创邑金沙谷6号楼113",
-                },
-                { value: "三全鲜食（北新泾店）", address: "长宁区新渔路144号" },
-                {
-                    value: "Hot honey 首尔炸鸡（仙霞路）",
-                    address: "上海市长宁区淞虹路661号",
-                },
-                {
-                    value: "新旺角茶餐厅",
-                    address: "上海市普陀区真北路988号创邑金沙谷6号楼113",
-                },
-                { value: "三全鲜食（北新泾店）", address: "长宁区新渔路144号" },
-                {
-                    value: "Hot honey 首尔炸鸡（仙霞路）",
-                    address: "上海市长宁区淞虹路661号",
-                },
-            ];
+            // let newData = this.searchData.map((item) => item.first);
+            // console.log(newData, "901");
+
+            return [{ value: this.newData, address: "长宁区新渔路144号" }];
         },
         handleSelect(item) {
             console.log(item);
@@ -352,11 +353,13 @@ export default {
             }
         }
         .center-lft {
-            width: 200px;
+            width: 270px;
             height: 100%;
+            border: 1px solid;
 
             box-sizing: border-box;
             display: flex;
+
             .person-img {
                 width: 45px;
                 height: 45px;
@@ -367,6 +370,7 @@ export default {
                 line-height: 70px;
                 margin-left: 10px;
                 color: white;
+
                 .loginBox {
                     box-shadow: 0 0 2px 2px #cecccc;
                 }
